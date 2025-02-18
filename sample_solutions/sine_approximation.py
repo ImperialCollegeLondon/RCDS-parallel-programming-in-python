@@ -1,4 +1,4 @@
-from multiprocessing import Process, Pool
+from multiprocessing import Pool
 from math import factorial, pi, sin
 
 def sine_term(x, k):

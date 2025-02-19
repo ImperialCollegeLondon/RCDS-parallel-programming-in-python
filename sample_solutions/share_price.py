@@ -42,19 +42,23 @@ local_results = np.asarray([simulate_share_price(initial_price, daily_change_mea
 
 square_local_results = local_results ** 2
 
-# Gather the results from all ranks
-total_results = comm.reduce(local_results, op=MPI.SUM, root=0)
-total_square_results = comm.reduce(square_local_results, op=MPI.SUM, root=0)
-minimum = comm.reduce(np.min(local_results), op=MPI.MIN, root=0)
-maximum = comm.reduce(np.max(local_results), op=MPI.MAX, root=0)
+# Sum and summarise local values
+total_local_results = local_results.sum()
+total_local_square_results = square_local_results.sum()
+local_min = np.min(local_results)
+local_max = np.max(local_results)
 
+# Gather the results from all ranks
+total_results = comm.reduce(total_local_results, op=MPI.SUM, root=0)
+total_square_results = comm.reduce(total_local_square_results, op=MPI.SUM, root=0)
+minimum = comm.reduce(local_min, op=MPI.MIN, root=0)
+maximum = comm.reduce(local_max, op=MPI.MAX, root=0)
 
 if rank == 0:
-    mean = total_results.sum() / n_simulations
-    std = np.sqrt(total_square_results.sum() / n_simulations - mean ** 2)
+    mean = total_results / n_simulations
+    std = np.sqrt(total_square_results / n_simulations - mean ** 2)
     print(f"Mean: {mean}")
     print(f"Standard deviation: {std}")
     print(f"Minimum: {minimum}")
     print(f"Maximum: {maximum}")
-
 

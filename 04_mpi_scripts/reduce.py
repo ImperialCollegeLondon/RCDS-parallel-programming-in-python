@@ -1,4 +1,4 @@
-# Run this script with the terminal command `mpiexec -n 4 python gather.py`
+# Run this script with the terminal command `mpiexec -n 4 python reduce.py`
 
 import mpi4py.MPI as MPI
 import numpy as np

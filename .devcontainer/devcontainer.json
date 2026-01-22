@@ -12,7 +12,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "sudo apt update && yes | sudo apt install mpich && mkdir -p ~/.config/pip && cp pip.ini ~/.config/pip/pip.ini && pip3 install --user -r requirements.txt",
+	"postCreateCommand": "sudo apt update && yes | sudo apt install mpich && pip3 install --user --no-binary mpi4py mpi4py && pip3 install --user -r requirements.txt",
 
 	// Configure tool-specific properties.
 	"customizations": {

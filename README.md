@@ -27,10 +27,22 @@ You will also need to [donwload a version of MPICH](https://www.mpich.org/downlo
 * ipykernel
 * numpy
 * matplotlib
-* mpi4py
+* mpi4py (built from source; installed separately)
 * pandas
+* scipy
 
-These packages are specified in the `requirements.txt` file which you could use to install the packages if you're familiar with how to use this kind of file.
+Because `mpi4py` needs to link against your installed MPI libraries, it is intentionally NOT included it in `requirements.txt` to avoid accidental binary wheel installs. Install `mpi4py` from source first, then install the remaining packages. Example:
+
+```bash
+# Install MPI (e.g., MPICH) using your OS package manager
+# Then compile and install mpi4py from source
+pip install --no-binary mpi4py mpi4py
+
+# Install the rest of the dependencies
+pip install -r requirements.txt
+```
+
+In the Codespace devcontainer, this is handled automatically: MPICH is installed via `apt`, and `mpi4py` is compiled from source during the container’s post-create step before installing the rest of the requirements.
 
 ## Opening a Codespace
 

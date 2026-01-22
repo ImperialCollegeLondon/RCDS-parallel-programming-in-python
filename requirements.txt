@@ -1,12 +1,17 @@
 # Core dependencies for parallel programming course
-# Note: mpi4py must be built from source to properly link against MPI libraries
-# on your system. The pip.ini file in this directory configures this automatically.
-# If you don't have a pip.ini, you can install with:
-#   pip install --no-binary :all: mpi4py
-#   pip install -r requirements.txt
+# Note: mpi4py should be built from source to correctly link against
+# the MPI libraries on your system. In the devcontainer, MPICH is
+# installed via apt and mpi4py is compiled from source using:
+#   pip install --no-binary mpi4py mpi4py
+# For manual installation outside the devcontainer:
+#   1) Install MPICH (or OpenMPI) for your OS
+#   2) pip install --no-binary mpi4py mpi4py
+#   3) pip install -r requirements.txt
+# Important: mpi4py is intentionally NOT listed below to avoid
+# accidental binary wheel installs. Install it separately from source
+# as shown above, then install the remaining packages.
 ipykernel
 numpy
 matplotlib
-mpi4py
 pandas
 scipy

@@ -1,3 +1,9 @@
+# Core dependencies for parallel programming course
+# Note: mpi4py must be built from source to properly link against MPI libraries
+# on your system. The pip.ini file in this directory configures this automatically.
+# If you don't have a pip.ini, you can install with:
+#   pip install --no-binary :all: mpi4py
+#   pip install -r requirements.txt
 ipykernel
 numpy
 matplotlib

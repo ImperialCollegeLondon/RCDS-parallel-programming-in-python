@@ -49,7 +49,6 @@ This course covers parallel programming in Python through seven modules:
 - Designed for distributed computing and HPC environments
 - Explicit communication with send/recv, collective operations
 - Rank-based organization of processes
-- Blocking vs non-blocking communication
 - Risk of deadlocks when communication order is incorrect
 
 **Design Principles:**

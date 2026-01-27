@@ -30,22 +30,18 @@ if __name__ == '__main__':
     # Number of processes to use
     n_processes = 4
 
-    # Create a list of processes
-    processes = []
-
     # Create the queue
     queue = multiprocessing.Queue()
 
     for i in range(n_processes):
         # Start the processes
         p = multiprocessing.Process(target=count_points_inside_circle, args=(n_points // n_processes, queue))
-        processes.append(p)
         p.start()
 
     # Initiate the variable to store the total number of points inside the circle
     n_points_inside_circle = 0
 
-    for p in processes:
+    for i in range(n_processes):
         # Add the number of points inside the circle
         # There is no need to wait for the processes to finish as get blocks until the result is available
         n_points_inside_circle += queue.get()

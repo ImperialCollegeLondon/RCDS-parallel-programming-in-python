@@ -11,21 +11,20 @@ def increment(v):
     with v.get_lock():
         v.value += 100
 
-if __name__ == '__main__':
-    # Create a shared memory value
-    # It is an integer with an initial value of 0
-    v = multiprocessing.Value(ctypes.c_int, 0)
+# Create a shared memory value
+# It is an integer with an initial value of 0
+v = multiprocessing.Value(ctypes.c_int, 0)
 
-    # Create n_process processes which increment the value
-    n_process = 8
-    processes = []
-    for i in range(n_process):
-        p = multiprocessing.Process(target=increment, args=(v,))
-        p.start()
-        processes.append(p)
+# Create n_process processes which increment the value
+n_process = 8
+processes = []
+for i in range(n_process):
+    p = multiprocessing.Process(target=increment, args=(v,))
+    p.start()
+    processes.append(p)
 
-    for i in range(n_process):
-        p.join()
+for i in range(n_process):
+    p.join()
 
-    # Print the value
-    print(v.value)
+# Print the value
+print(v.value)

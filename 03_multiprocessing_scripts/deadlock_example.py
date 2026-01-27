@@ -9,17 +9,16 @@ def calculate_sum(conn):
     # Send the result back to the parent process
     conn.send(result)
 
-if __name__ == '__main__':
-    # Create a Pipe() object
-    # This function returns a pair of connection objects connected by a pipe
-    parent_conn, child_conn = multiprocessing.Pipe()
-    # Create a process and pass the child connection object to it
-    # The process will implement the calculate_sum function
-    p = multiprocessing.Process(target=calculate_sum, args=(child_conn,))
-    # Start the process
-    p.start()
-    # Receive the result from the child process
-    print(parent_conn.recv())
-    # Wait until the process is finished
-    p.join()
-    print('Main process is done')
+# Create a Pipe() object
+# This function returns a pair of connection objects connected by a pipe
+parent_conn, child_conn = multiprocessing.Pipe()
+# Create a process and pass the child connection object to it
+# The process will implement the calculate_sum function
+p = multiprocessing.Process(target=calculate_sum, args=(child_conn,))
+# Start the process
+p.start()
+# Receive the result from the child process
+print(parent_conn.recv())
+# Wait until the process is finished
+p.join()
+print('Main process is done')

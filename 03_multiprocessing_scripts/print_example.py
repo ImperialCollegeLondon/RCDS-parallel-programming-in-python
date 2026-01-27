@@ -7,13 +7,12 @@ processes = []
 
 print(__name__)
 
-if __name__ == '__main__':
-    for i in range(2):
-        p =multiprocessing.Process(target=greeting, args=(i,))
-        p.start()
-        processes.append(p)
+for i in range(2):
+    p =multiprocessing.Process(target=greeting, args=(i,))
+    p.start()
+    processes.append(p)
 
-    for p in processes:
-        p.join()
+for p in processes:
+    p.join()
 
-    print('Main process is done')
+print('Main process is done')

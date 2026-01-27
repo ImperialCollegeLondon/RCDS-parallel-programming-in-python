@@ -60,18 +60,17 @@ def plot_histogram(data):
     plt.title('Histogram of Peak Temperature')
     plt.savefig('outputs/peak_temperature_histogram.png')
 
-if __name__ == '__main__':
-    # Define the number of samples to generate and number of processes to use
-    n_samples = int(1e5)
-    n_processes = 4
-    
-    # Create a list of arguments for the function
-    arguments = [(300, 10, 10, 0.9 + 0.2 * random.random()) for _ in range(n_samples)]
-    # Create a pool of processes
-    with multiprocessing.Pool(n_processes) as pool:
-        # Use the pool to calculate the results
-        # Use starmap to pass the arguments to the function
-        # The results will be returned in a list
-        results = pool.starmap(get_peak_temperature, arguments)
-    # We can pass the results straight to the plotting function
-    plot_histogram(results)
+# Define the number of samples to generate and number of processes to use
+n_samples = int(1e5)
+n_processes = 4
+
+# Create a list of arguments for the function
+arguments = [(300, 10, 10, 0.9 + 0.2 * random.random()) for _ in range(n_samples)]
+# Create a pool of processes
+with multiprocessing.Pool(n_processes) as pool:
+    # Use the pool to calculate the results
+    # Use starmap to pass the arguments to the function
+    # The results will be returned in a list
+    results = pool.starmap(get_peak_temperature, arguments)
+# We can pass the results straight to the plotting function
+plot_histogram(results)

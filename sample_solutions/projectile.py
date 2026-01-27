@@ -56,58 +56,57 @@ def calculate_range_distribution(n_samples, min_angle, max_angle, min_velocity, 
         for i in range(n_bins):
             bin_counts_array[i] += bin_counts[i]
 
-if __name__ == '__main__':
-    start_time = time.time()
+start_time = time.time()
 
-    # Define the parameters
-    n_samples = int(1e7)
-    n_bins = 20
-    min_angle = 30
-    max_angle = 31
-    min_velocity = 99
-    max_velocity = 100
-    
-    # Define the number of processes and samples per process
-    n_processes = 4
-    n_samples_per_process = n_samples // n_processes
+# Define the parameters
+n_samples = int(1e7)
+n_bins = 20
+min_angle = 30
+max_angle = 31
+min_velocity = 99
+max_velocity = 100
 
-    # Create the list of processes and the shared array
-    process = []
-    bin_counts_array = multiprocessing.Array(ctypes.c_long, n_bins)
+# Define the number of processes and samples per process
+n_processes = 4
+n_samples_per_process = n_samples // n_processes
 
-    # Find the angle that gives the maximum range
-    if min_angle < 45 and max_angle > 45:
-        max_range_angle = 45
-    elif min_angle < 45:
-        max_range_angle = max_angle
-    else:
-        max_range_angle = min_angle
+# Create the list of processes and the shared array
+process = []
+bin_counts_array = multiprocessing.Array(ctypes.c_long, n_bins)
 
-    # Find the maximum and minimum ranges
-    max_range = calculate_range(max_range_angle, max_velocity)
-    min_range = min(calculate_range(min_angle, min_velocity), calculate_range(max_angle, min_velocity))
+# Find the angle that gives the maximum range
+if min_angle < 45 and max_angle > 45:
+    max_range_angle = 45
+elif min_angle < 45:
+    max_range_angle = max_angle
+else:
+    max_range_angle = min_angle
 
-    for i in range(n_processes):
-        # Run each process
-        p = multiprocessing.Process(target=calculate_range_distribution, args=(n_samples_per_process, min_angle, max_angle, min_velocity, max_velocity, min_range, max_range, bin_counts_array))
-        process.append(p)
-        p.start()
+# Find the maximum and minimum ranges
+max_range = calculate_range(max_range_angle, max_velocity)
+min_range = min(calculate_range(min_angle, min_velocity), calculate_range(max_angle, min_velocity))
 
-    # While we wait, create the boundaries of the bins
-    bin_boundaries = [min_range + i * (max_range - min_range) / n_bins for i in range(n_bins + 1)]
+for i in range(n_processes):
+    # Run each process
+    p = multiprocessing.Process(target=calculate_range_distribution, args=(n_samples_per_process, min_angle, max_angle, min_velocity, max_velocity, min_range, max_range, bin_counts_array))
+    process.append(p)
+    p.start()
 
-    # Wait for the processes to finish
-    for p in process:
-        p.join()
-    
-    # Convert the shared array to a list
-    bin_counts = list(bin_counts_array[:])
+# While we wait, create the boundaries of the bins
+bin_boundaries = [min_range + i * (max_range - min_range) / n_bins for i in range(n_bins + 1)]
 
-    end_time = time.time()
+# Wait for the processes to finish
+for p in process:
+    p.join()
 
-    # Print the outputs
-    for i in range(len(bin_boundaries) - 1):
-        print(f'Range: {bin_boundaries[i]:,.2f}m-{bin_boundaries[i + 1]:,.2f}m: {bin_counts[i]:,}')
+# Convert the shared array to a list
+bin_counts = list(bin_counts_array[:])
 
-    # Print the running time
-    print(f'Time taken: {end_time - start_time}s')
+end_time = time.time()
+
+# Print the outputs
+for i in range(len(bin_boundaries) - 1):
+    print(f'Range: {bin_boundaries[i]:,.2f}m-{bin_boundaries[i + 1]:,.2f}m: {bin_counts[i]:,}')
+
+# Print the running time
+print(f'Time taken: {end_time - start_time}s')

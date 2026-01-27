@@ -65,25 +65,24 @@ def calculate_range_distribution(n_samples, n_bins, min_angle, max_angle, min_ve
 
     return bin_boundaries, bin_counts
 
-if __name__ == '__main__':
-    start_time = time.time()
+start_time = time.time()
 
-    # Define the parameters
-    n_samples = int(1e7)
-    n_bins = 20
-    min_angle = 30
-    max_angle = 31
-    min_velocity = 99
-    max_velocity = 100
+# Define the parameters
+n_samples = int(1e7)
+n_bins = 20
+min_angle = 30
+max_angle = 31
+min_velocity = 99
+max_velocity = 100
 
 
-    # Calculate the bin boundaries and counts
-    bin_boundaries, bin_counts = calculate_range_distribution(n_samples, n_bins, min_angle, max_angle, min_velocity, max_velocity)
-    end_time = time.time()
+# Calculate the bin boundaries and counts
+bin_boundaries, bin_counts = calculate_range_distribution(n_samples, n_bins, min_angle, max_angle, min_velocity, max_velocity)
+end_time = time.time()
 
-    # Print the outputs
-    for i in range(len(bin_boundaries) - 1):
-        print(f'Range: {bin_boundaries[i]:,.2f}m-{bin_boundaries[i + 1]:,.2f}m: {bin_counts[i]:,}')
+# Print the outputs
+for i in range(len(bin_boundaries) - 1):
+    print(f'Range: {bin_boundaries[i]:,.2f}m-{bin_boundaries[i + 1]:,.2f}m: {bin_counts[i]:,}')
 
-    # Print the running time
-    print(f'Time taken: {end_time - start_time}s')
+# Print the running time
+print(f'Time taken: {end_time - start_time}s')

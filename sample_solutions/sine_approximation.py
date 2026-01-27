@@ -24,12 +24,11 @@ def sine_approx(x, n_terms):
     # Return the sum of the terms
     return sum(terms)
 
-if __name__ == '__main__':
-    # Test the sine_approx function
-    x = 0.5
-    n_terms = 3
-    print(sine_approx(x, n_terms), sin(x))
+# Test the sine_approx function
+x = 0.5
+n_terms = 3
+print(sine_approx(x, n_terms), sin(x))
 
-    x = pi
-    n_terms = 5
-    print(sine_approx(x, n_terms), sin(x))
+x = pi
+n_terms = 5
+print(sine_approx(x, n_terms), sin(x))

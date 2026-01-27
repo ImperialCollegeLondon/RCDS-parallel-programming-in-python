@@ -12,24 +12,23 @@ def roll_n_dice(n, array):
         for i in range(6):
             array[i] += local_results[i]
 
-if __name__ == '__main__':
-    # Create a shared memory array
-    # It is an array of 6 floats with an initial value of 0
-    a = multiprocessing.Array(ctypes.c_int, 6)
+# Create a shared memory array
+# It is an array of 6 floats with an initial value of 0
+a = multiprocessing.Array(ctypes.c_int, 6)
 
-    n_rolls_total = int(1e6)
+n_rolls_total = int(1e6)
 
-    # Create n_process processes
-    n_process = 4
-    processes = []
-    for i in range(n_process):
-        p = multiprocessing.Process(target=roll_n_dice, args=(n_rolls_total // n_process, a))
-        processes.append(p)
-        p.start()
+# Create n_process processes
+n_process = 4
+processes = []
+for i in range(n_process):
+    p = multiprocessing.Process(target=roll_n_dice, args=(n_rolls_total // n_process, a))
+    processes.append(p)
+    p.start()
 
-    # Wait for all processes to finish
-    for p in processes:
-        p.join()
+# Wait for all processes to finish
+for p in processes:
+    p.join()
 
-    # Print the results
-    print(f'Results after {n_rolls_total} rolls: {list(a[:])}')
+# Print the results
+print(f'Results after {n_rolls_total} rolls: {list(a[:])}')

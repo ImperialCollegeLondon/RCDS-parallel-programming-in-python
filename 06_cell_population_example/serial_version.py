@@ -154,25 +154,24 @@ def run_multiple_realisations(n_initial, reproduction_probability, mean_lifetime
 
     return running_time, plotting_time, realisation_df
 
-if __name__ == '__main__':
-    # Some sample calls of the functions
-    output_times = np.linspace(0, 100, 1000)
+# Some sample calls of the functions
+output_times = np.linspace(0, 100, 1000)
 
-    # On average, the population will grow
-    reproduction_probability = 0.55
-    mean_lifetime = 1
+# On average, the population will grow
+reproduction_probability = 0.55
+mean_lifetime = 1
 
-    # Time and run a single realisation 
-    run_time, plotting_time = run_single_realisation(1, reproduction_probability, mean_lifetime, output_times, '06_cell_population_example/single_quick_death.png', seed=0)
-    print(f'Single realisation quick death running time: {run_time}s; plotting time: {plotting_time}s')
+# Time and run a single realisation 
+run_time, plotting_time = run_single_realisation(1, reproduction_probability, mean_lifetime, output_times, '06_cell_population_example/single_quick_death.png', seed=0)
+print(f'Single realisation quick death running time: {run_time}s; plotting time: {plotting_time}s')
 
-    # Time and run a single realisation
-    run_time, plotting_time = run_single_realisation(1, reproduction_probability, mean_lifetime, output_times, '06_cell_population_example/single_growing_population.png', seed=42)
-    print(f'Growing population realisation quick death running time: {run_time}s; plotting time: {plotting_time}s')
+# Time and run a single realisation
+run_time, plotting_time = run_single_realisation(1, reproduction_probability, mean_lifetime, output_times, '06_cell_population_example/single_growing_population.png', seed=42)
+print(f'Growing population realisation quick death running time: {run_time}s; plotting time: {plotting_time}s')
 
-    # Time and run multiple realisations
-    run_time, plotting_time, realisation_df = run_multiple_realisations(1, reproduction_probability, mean_lifetime, output_times, 200, '06_cell_population_example/multiple_realisations.png')
-    print(f'Multiple realisations running time: {run_time}s; plotting time: {plotting_time}s')
+# Time and run multiple realisations
+run_time, plotting_time, realisation_df = run_multiple_realisations(1, reproduction_probability, mean_lifetime, output_times, 200, '06_cell_population_example/multiple_realisations.png')
+print(f'Multiple realisations running time: {run_time}s; plotting time: {plotting_time}s')
 
-    visualise_realisation_runtimes(realisation_df, '06_cell_population_example/serial_runtimes.png')
+visualise_realisation_runtimes(realisation_df, '06_cell_population_example/serial_runtimes.png')
 

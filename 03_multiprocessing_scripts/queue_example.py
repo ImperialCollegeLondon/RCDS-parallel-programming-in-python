@@ -25,36 +25,35 @@ def find_smallest_multiple(n_data, factor, queue):
     # After considering each value, put the result in the queue
     queue.put(result)
 
-if __name__ == '__main__':
-    # Set up the problem data
-    n_processes = 2
-    n_data = int(1e6)
-    factor = 7
-    n_data_per_process = n_data // n_processes
+# Set up the problem data
+n_processes = 2
+n_data = int(1e6)
+factor = 7
+n_data_per_process = n_data // n_processes
 
-    # Set up the queue
-    queue = multiprocessing.Queue()
+# Set up the queue
+queue = multiprocessing.Queue()
 
-    for i in range(n_processes):
-        # Spawn and start the processes
-        p = multiprocessing.Process(target=find_smallest_multiple, args=(n_data_per_process, factor, queue))
-        p.start()
+for i in range(n_processes):
+    # Spawn and start the processes
+    p = multiprocessing.Process(target=find_smallest_multiple, args=(n_data_per_process, factor, queue))
+    p.start()
 
-    # We haven't found any multiples of factor yet
-    result = None
+# We haven't found any multiples of factor yet
+result = None
 
-    for i in range(n_processes):
-        # Get each result from the queue
-        # The code will pause here while the main process waits for each child process to finish
-        r = queue.get()
+for i in range(n_processes):
+    # Get each result from the queue
+    # The code will pause here while the main process waits for each child process to finish
+    r = queue.get()
 
-        if result is None or r < result:
-            # If it's smaller than the current result, update it
-            result = r
+    if result is None or r < result:
+        # If it's smaller than the current result, update it
+        result = r
 
-    # Note the end time and print the elapsed time
-    end_time = time.time()
-    print(f'Time taken: {end_time - start_time}')
+# Note the end time and print the elapsed time
+end_time = time.time()
+print(f'Time taken: {end_time - start_time}')
 
-    print(f'The smallest multiple of {factor} in the data is {result}')
+print(f'The smallest multiple of {factor} in the data is {result}')
 

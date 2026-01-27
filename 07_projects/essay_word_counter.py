@@ -80,23 +80,22 @@ def add_dictionaries(d1, d2):
 
     return combined_dict
 
-if __name__ == '__main__':
-    # A sample usage of the functions on the first two essays (essay_000.txt)
-    # Get the filepath
-    file_path = form_filepath(0)
-    # Count the occurrences of each word in the file
-    word_occurrences_0 = count_word_occurrences_in_file(file_path)
+# A sample usage of the functions on the first two essays (essay_000.txt)
+# Get the filepath
+file_path = form_filepath(0)
+# Count the occurrences of each word in the file
+word_occurrences_0 = count_word_occurrences_in_file(file_path)
 
-    # Repeat for the second file
-    file_path = form_filepath(1)
-    word_occurrences_1 = count_word_occurrences_in_file(file_path)
+# Repeat for the second file
+file_path = form_filepath(1)
+word_occurrences_1 = count_word_occurrences_in_file(file_path)
 
-    # Add the two dictionaries together
-    combined_word_occurrences = add_dictionaries(word_occurrences_0, word_occurrences_1)
+# Add the two dictionaries together
+combined_word_occurrences = add_dictionaries(word_occurrences_0, word_occurrences_1)
 
-    # Sort the combined dictionary by value
-    sorted_word_occurrences = sort_dict_by_value(combined_word_occurrences)
-    
-    # Print the sorted dictionary
-    print(sorted_word_occurrences)
+# Sort the combined dictionary by value
+sorted_word_occurrences = sort_dict_by_value(combined_word_occurrences)
+
+# Print the sorted dictionary
+print(sorted_word_occurrences)
     

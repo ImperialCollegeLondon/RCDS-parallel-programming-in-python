@@ -18,7 +18,7 @@ The course materials are stored in this Github repository. You may review them b
 
 During the course you will need to be able toview the course materials and run the codes in the repository. The easiest way to run the course materials in a GitHub Codespace (instructions below), which can be done on a computer room computer for a face to face session, or your own laptop. This requires no setup in advance past the pre-course instructions above. 
 
-Alternatively, you may download the course materials on to your own computer, install [Visual Studio Code](https://code.visualstudio.com/) and install the following extensions within VS Code:
+Alternatively, you may download the course materials on to your own computer. This requires substantial setup and some aspects of code will not work smoothly (particularly on Windows machines) so you are advised to use a Codespace if possible. To run the code locally, you should install [Visual Studio Code](https://code.visualstudio.com/) and install the following extensions within VS Code:
 * [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 * [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
 
@@ -41,8 +41,6 @@ pip install --no-binary mpi4py mpi4py
 # Install the rest of the dependencies
 pip install -r requirements.txt
 ```
-
-In the Codespace devcontainer, this is handled automatically: MPICH is installed via `apt`, and `mpi4py` is compiled from source during the container’s post-create step before installing the rest of the requirements.
 
 ## Opening a Codespace
 
